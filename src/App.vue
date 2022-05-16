@@ -22,7 +22,7 @@
         <!-- /End replace -->
       </div>
     </main>
-    <footer class="p-4 bg-white rounded-lg shadow md:px-6 md:py-8 dark:bg-gray-800">
+    <footer class="p-4 bg-white shadow md:px-6 md:py-8 dark:bg-gray-800">
       <span class="block text-sm text-gray-500 flex place-content-center gap-1 dark:text-gray-400">
         © 2022 
         <a href="#" class="hover:underline">
