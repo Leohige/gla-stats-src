@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.character-medal {
+    max-width: 90px;
+    max-height: 90px;
+}
