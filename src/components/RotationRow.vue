@@ -3,25 +3,25 @@
         <!-- chest 1 session -->
         <td scope="row" class="px-6 py-4">
             <div class="flex -space-x-7 justify-center">
-                <Medal v-if="first_chest[0]" :character="first_chest[0]" />
-                <Medal v-if="first_chest[1]" :character="first_chest[1]" />
-                <Medal v-if="first_chest[2]" :character="first_chest[2]" />
+                <Medal v-once v-show="first_chest[0]" :character="first_chest[0]" />
+                <Medal v-once v-show="first_chest[1]" :character="first_chest[1]" />
+                <Medal v-once v-show="first_chest[2]" :character="first_chest[2]" />
             </div>
         </td>
 
         <!-- chest 2 session -->
         <td scope="row" class="px-6 py-4">
             <div class="flex -space-x-7 justify-center">
-                <Medal v-if="second_chest[0]" :character="second_chest[0]" />
-                <Medal v-if="second_chest[1]" :character="second_chest[1]" />
-                <Medal v-if="second_chest[2]" :character="second_chest[2]" />
+                <Medal v-once v-show="second_chest[0]" :character="second_chest[0]" />
+                <Medal v-once v-show="second_chest[1]" :character="second_chest[1]" />
+                <Medal v-once v-show="second_chest[2]" :character="second_chest[2]" />
             </div>
         </td>
 
         <!-- special chest session -->
         <td scope="row" class="px-6 py-4">
             <div class="flex -space-x-7 justify-center">
-                <Medal v-if="special_chest[0]" :character="special_chest[0]" />
+                <Medal v-once v-show="special_chest[0]" :character="special_chest[0]" />
             </div>
         </td>
 

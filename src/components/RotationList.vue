@@ -3,8 +3,8 @@
         <div id="revue-embed" class="p-4 my-8 bg-white rounded-lg shadow-md sm:p-6 lg:p-8 dark:bg-gray-800 dark:border-gray-700">
             <h3 class="mb-5 text-xl font-medium text-gray-900 dark:text-white">Pesquisar</h3>
         
-            <div class="grid grid-cols-3 gap-4 items-end mb-3">
-                <div class="grid grid-cols-2 col-span-1 gap-4">
+            <div class="grid md:grid-cols-3 gap-4 items-end mb-3">
+                <div class="grid sm:grid-cols-2 col-span-1 gap-4">
                     <div class="relative">
                         <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                             <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
@@ -19,7 +19,7 @@
                     </div>
                 </div>
                 
-                <div class="col-span-2 relative">
+                <div class="md:col-span-2 relative">
                     <div class="relative w-full">
                         <input type="search" @keyup.enter="search()" v-model="search_character_name" class="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500" placeholder="Digite o nome de um personagem..." required="">
                         <button type="button" @click="search()" class="absolute top-0 right-0 p-2.5 text-sm font-medium text-white bg-blue-700 rounded-r-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg></button>
@@ -52,7 +52,7 @@
                 <tbody>
                         <RotationRow 
                             v-for="weekly_rotation in weekly_rotations_paginated"
-                            :key="weekly_rotation.id" 
+                            :key="weekly_rotation.date" 
                             :uuid="weekly_rotation.id"
                             :first_chest="weekly_rotation.first_chest"
                             :second_chest="weekly_rotation.second_chest"
@@ -63,7 +63,7 @@
             </table>
         </div>
 
-        <div v-show="total" class="bg-white rounded-bl-lg rounded-br-lg shadow-md sm:p-6 lg:p-8 dark:bg-gray-700 dark:border-gray-700 flex justify-center">
+        <div v-show="total" class="bg-white rounded-bl-lg rounded-br-lg shadow-md p-6 dark:bg-gray-700 dark:border-gray-700 flex justify-center">
             <Pagination :current="current_page" :total="total" :perPage="5" @page-changed="pageChanged($event)"/>
         </div>
     </div>
@@ -99,7 +99,7 @@ export default {
             this.paginate(this.current_page)
         },
         paginate(page_number) {
-            this.weekly_rotations_paginated = this.weekly_rotations_filtered.slice((page_number - 1) * 5, page_number * 5);
+            this.weekly_rotations_paginated = Object.freeze(this.weekly_rotations_filtered.slice((page_number - 1) * 5, page_number * 5));
         },
         search() {
             let start_date = document.querySelector("input[name=start_date]").value
