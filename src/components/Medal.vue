@@ -20,7 +20,7 @@
         methods: {
             getImageUrl() {
                 if (process.env.NODE_ENV == 'production') {
-                    return new URL(`../gla-stats/assets/${this.character.toLowerCase()}.png`, window.location.href).href
+                    return new URL(`../gla-wiki/assets/${this.character.toLowerCase()}.png`, window.location.href).href
                 } else {
                     return new URL(`../assets/images/characters_medal/${this.character.toLowerCase()}.png`, import.meta.url).href
                 }

@@ -1,5 +1,6 @@
 {
-  "name": "gla-stats",
+  "name": "gla-wiki",
+  "author": "Leohige",
   "private": true,
   "version": "1.0.0",
   "scripts": {

@@ -1,4 +1,4 @@
-# GLA Stats
+# GLA Wiki
 
 ## Recommended IDE Setup
 
