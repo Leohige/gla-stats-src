@@ -14,7 +14,8 @@
     "@vue-hero-icons/outline": "^1.7.2",
     "flowbite": "^1.4.5",
     "vue": "^3.2.25",
-    "vue-router": "^4.0.13"
+    "vue-router": "^4.0.13",
+    "vue3-markdown-it": "^1.0.10"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^2.3.1",

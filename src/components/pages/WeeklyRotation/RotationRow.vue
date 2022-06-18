@@ -3,25 +3,25 @@
         <!-- chest 1 session -->
         <td scope="row" class="px-6 py-4">
             <div class="flex -space-x-7 justify-center">
-                <Medal v-once v-show="first_chest[0]" :character="first_chest[0]" />
-                <Medal v-once v-show="first_chest[1]" :character="first_chest[1]" />
-                <Medal v-once v-show="first_chest[2]" :character="first_chest[2]" />
+                <CharacterMedal v-once v-show="first_chest[0]" :character="first_chest[0]" />
+                <CharacterMedal v-once v-show="first_chest[1]" :character="first_chest[1]" />
+                <CharacterMedal v-once v-show="first_chest[2]" :character="first_chest[2]" />
             </div>
         </td>
 
         <!-- chest 2 session -->
         <td scope="row" class="px-6 py-4">
             <div class="flex -space-x-7 justify-center">
-                <Medal v-once v-show="second_chest[0]" :character="second_chest[0]" />
-                <Medal v-once v-show="second_chest[1]" :character="second_chest[1]" />
-                <Medal v-once v-show="second_chest[2]" :character="second_chest[2]" />
+                <CharacterMedal v-once v-show="second_chest[0]" :character="second_chest[0]" />
+                <CharacterMedal v-once v-show="second_chest[1]" :character="second_chest[1]" />
+                <CharacterMedal v-once v-show="second_chest[2]" :character="second_chest[2]" />
             </div>
         </td>
 
         <!-- special chest session -->
         <td scope="row" class="px-6 py-4">
             <div class="flex -space-x-7 justify-center">
-                <Medal v-once v-show="special_chest[0]" :character="special_chest[0]" />
+                <CharacterMedal v-once v-show="special_chest[0]" :character="special_chest[0]" />
             </div>
         </td>
 
@@ -49,47 +49,37 @@
 </template>
 
 <script>
-    import Medal from './Medal.vue'
-    import Tooltip from './Tooltip.vue'
+import CharacterMedal from '@/components/ui/CharacterMedal.vue'
 
-    export default {
-        props: {
-            uuid: {
-                type: String,
-                default: ''
-            },
-            first_chest: {
-                type: Array,
-                default: ['', '', '']
-            },
-            second_chest: {
-                type: Array,
-                default: ['', '', '']
-            },
-            special_chest: {
-                type: Array,
-                default: ['', '', '']
-            },
-            date: {
-                type: String,
-                default: 'Missing Date'
-            },
-            facebook_post: {
-                type: String,
-                default: 'http://facebook.com'
-            }
+export default {
+    props: {
+        uuid: {
+            type: String,
+            default: ''
         },
-        components: {
-            Medal,
-            Tooltip
+        first_chest: {
+            type: Array,
+            default: ['', '', '']
         },
-        methods: {
-            getImageUrl(name) {
-                return new URL(`../assets/images/characters_medal/${name}.png`, import.meta.url)
-            },
-            getBannerImageUrl(name) {
-                return new URL(`../assets/images/banners/${name}.png`, import.meta.url)
-            }
+        second_chest: {
+            type: Array,
+            default: ['', '', '']
+        },
+        special_chest: {
+            type: Array,
+            default: ['', '', '']
+        },
+        date: {
+            type: String,
+            default: 'Missing Date'
+        },
+        facebook_post: {
+            type: String,
+            default: 'http://facebook.com'
         }
+    },
+    components: {
+        CharacterMedal
     }
+}
 </script>

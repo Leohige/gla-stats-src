@@ -1,66 +1,37 @@
-<script>
-  import NavBar from './components/NavBar.vue'
-
-  export default {
-    components: {
-      NavBar
-    },
-    computed: {
-      currentRouteName() {
-        return this.$route.name;
-      }
-    }
-  }
-</script>
-
 <template>
-  <div class="min-h-screen dark:bg-gray-900 flex flex-col">
-    <NavBar></NavBar>
-    <header v-show="currentRouteName != 'Not Found'" class="bg-white dark:bg-gray-700 shadow">
-      <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 flex justify-between items-center">
-        <div>
-          <h1 class="text-xl font-medium text-gray-900 dark:text-gray-300">{{ currentRouteName }}</h1>
-        </div>          
-        <div>
-          <nav class="flex" aria-label="Breadcrumb">
-            <ol class="inline-flex items-center space-x-1 md:space-x-3">
-              <li class="inline-flex items-center">
-                <a href="#" class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white">
-                  <svg class="mr-2 w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path></svg>
-                  Ínicio
-                </a>
-              </li>
-              <li v-show="currentRouteName != 'Início'" aria-current="page">
-                <div class="flex items-center">
-                  <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
-                  <span class="ml-1 text-sm font-medium text-gray-400 md:ml-2 dark:text-gray-500">{{ currentRouteName }}</span>
-                </div>
-              </li>
-            </ol>
-          </nav>
-        </div>
-      </div>
-    </header>
-    <main class="flex-grow">
-      <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-        <!-- Replace with your content -->
-        <div class="px-4 py-6 sm:px-0">
-          <router-view></router-view>
-        </div>
-        <!-- /End replace -->
-      </div>
-    </main>
-    <footer class="p-4 bg-white shadow md:px-6 md:py-8 dark:bg-gray-800">
-      <span class="block text-sm text-gray-500 flex place-content-center gap-1 dark:text-gray-400">
-        © 2022 
-        <a href="#" class="hover:underline">
-          GLA Wiki
-        </a> 
-        by Leohige.
-        <a href="https://github.com/leohige/gla-wiki" target="_blank" class="hover:underline">
-          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd" /></svg>
-        </a>
-      </span>
-  </footer>
-  </div>
+    <div class="min-h-screen bg-gray-50 dark:bg-gray-900 flex flex-col">
+        <NavBar></NavBar>
+        <Breadcrumb></Breadcrumb>
+        <router-view v-slot="{ Component }">
+            <keep-alive>
+                <Markdown :html="true" :xhtmlOut="true" :source="source" />
+            </keep-alive>
+        </router-view>
+        <Footer></Footer>
+    </div>
 </template>
+
+<script>
+import NavBar from '@/components/ui/NavBar.vue'
+import Breadcrumb from '@/components/ui/Breadcrumb.vue'
+import Footer from '@/components/ui/Footer.vue'
+import Markdown from 'vue3-markdown-it';
+import {compile} from "vue"
+
+export default {
+    data() {
+        return {
+            source: compile("<Footer/>")
+        }
+    },
+    components: {
+        NavBar,
+        Breadcrumb,
+        Footer,
+        Markdown
+    },
+    mounted() {
+        document.documentElement.classList.add('dark')
+    }
+}
+</script>
